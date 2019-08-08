@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBayarCicilansTable extends Migration
+class CreateBidangStudisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateBayarCicilansTable extends Migration
      */
     public function up()
     {
-        Schema::create('bayar_cicilans', function (Blueprint $table) {
+        Schema::create('bidang_studis', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('bidang_kode')->unique();
+            $table->string('bidang_nama');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateBayarCicilansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bayar_cicilans');
+        Schema::dropIfExists('bidang_studis');
     }
 }

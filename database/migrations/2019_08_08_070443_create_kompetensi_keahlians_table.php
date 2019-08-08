@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBeliKreditsTable extends Migration
+class CreateKompetensiKeahliansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateBeliKreditsTable extends Migration
      */
     public function up()
     {
-        Schema::create('beli_kredits', function (Blueprint $table) {
+        Schema::create('kompetensi_keahlians', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('kompetensi_kode')->unique();
+            $table->unsignedBigInteger('bidang_id');
+            $table->string('kompetensi_nama');
+            $table->foreign('bidang_id')->references('id')->on('bidang_studis');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateBeliKreditsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('beli_kredits');
+        Schema::dropIfExists('kompetensi_keahlians');
     }
 }

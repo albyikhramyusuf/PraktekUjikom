@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::gruop(['prefix' => 'backend','middleware' => ['auth','role:superadmin']],function(){
+    Route::get('/', function() {
+        return 'hallo';
+    });
+    Route::resource('user','UserController');
+});

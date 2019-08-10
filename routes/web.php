@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::gruop(['prefix' => 'backend','middleware' => ['auth','role:superadmin']],function(){
+Route::group(['prefix' => 'backend','middleware' => ['auth','role:superadmin']],function(){
     Route::get('/', function() {
         return 'hallo';
     });

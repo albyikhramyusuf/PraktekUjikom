@@ -13,6 +13,12 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
+        $response = [
+            'success' => true,
+            'data' => $user,
+            'message' => 'Berhasil Ditampilkan'
+        ];
+        return response()->json($response, 200);
     }
 
     /**
@@ -55,7 +61,13 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $response = [
+            'success' => true,
+            'data' => $user,
+            'message' => 'Berhasil Ditampilkan'
+        ];
+        return response()->json($response, 200);
     }
 
     /**

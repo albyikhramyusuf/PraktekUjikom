@@ -1,11 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request; 
-use App\Bidangstudi;
-
-class BidangstudiController extends Controller
+use Illuminate\Http\Request;
+use App\Bidang_studi;
+use Session;
+class BidangStudiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +12,9 @@ class BidangstudiController extends Controller
      */
     public function index()
     {
-        $bidangstudi = Bidangstudi::all();
+        $bidangstudi = Bidang_studi::all();
         return view('backend.bidangstudi.index', compact('bidangstudi'));
     }
-    
-
     /**
      * Show the form for creating a new resource.
      *
@@ -26,10 +22,10 @@ class BidangstudiController extends Controller
      */
     public function create()
     {
-        $bidangstudi = Bidangstudi::all();
-        return view('backend.bidangstudi.create',compact('bidangstudi'));
-    }
+        $bidangstudi = Bidang_studi::all();
+        return view('backend.bidangstudi.create', compact('bidangstudi'));
 
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -38,18 +34,16 @@ class BidangstudiController extends Controller
      */
     public function store(Request $request)
     {
-        $bidangstudi = new Bidangstudi();
+        $bidangstudi = new Bidang_studi;
         $bidangstudi->bidang_kode = $request->bidang_kode;
         $bidangstudi->bidang_nama = $request->bidang_nama;
         $bidangstudi->save();
-        Session::flash("flash_notification",[
+        Session::flash("flash_notification", [
             "level" => "success",
-            "message" => "Berhasil menyimpan<b>"
-                         . $bidangstudi->bidangstudi_nama."</b>"
+            "message" => "Berhasil Menyimpan <b>$bidangstudi->bidang_nama</b>"
         ]);
         return redirect()->route('bidangstudi.index');
     }
-
     /**
      * Display the specified resource.
      *
@@ -58,10 +52,8 @@ class BidangstudiController extends Controller
      */
     public function show($id)
     {
-        $bidangstudi = Bidangstudi::findOrFail($id);
-        return view('backend.bidangstudi.show', compact('bidangstudi'));
+        
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -70,10 +62,9 @@ class BidangstudiController extends Controller
      */
     public function edit($id)
     {
-         $bidangstudi = bidangstudi::findOrfail($id);
-        return view('backend.bidangstudi.edit',compact('bidangstudi'));
+        $bidangstudi = Bidang_studi::findOrFail($id);
+        return view('backend.bidangstudi.edit', compact('bidangstudi'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -83,19 +74,16 @@ class BidangstudiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $bidangstudi = Bidangstudi::findOrfail($id);
+        $bidangstudi = Bidang_studi::findOrFail($id);
         $bidangstudi->bidang_kode = $request->bidang_kode;
         $bidangstudi->bidang_nama = $request->bidang_nama;
         $bidangstudi->save();
-        Session::flash("flash_notification",[
+        Session::flash("flash_notification", [
             "level" => "success",
-            "message" => "Berhasil menyimpan<b>"
-                         . $bidangstudi->bidang_nama."</b>"
+            "message" => "Berhasil Mengedit <b>$bidangstudi->bidang_nama</b>"
         ]);
         return redirect()->route('bidangstudi.index');
-
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -104,13 +92,11 @@ class BidangstudiController extends Controller
      */
     public function destroy($id)
     {
-        $bidangstudi = Bidangstudi::findOrfail($id)->delete();
+        $bidangstudi = Bidang_studi::findOrFail($id)->delete();
         Session::flash("flash_notification", [
-            "level" => "Success",
-            "message" => "Berhasil menghapus<b>"
-                . $bidangstudi->nama_bidang . "</b>"
+            "level" => "success",
+            "message" => "Data Berhasil dihapus"
         ]);
         return redirect()->route('bidangstudi.index');
     }
-    
 }

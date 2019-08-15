@@ -18,12 +18,14 @@ Route::get('/', function () {
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
-    // Route::get('/', function () {
-    //     return 'halo';
-    // });
+Route::group(['prefix' => 'backend', 'middleware' => ['auth']], function () {
+     Route::get('/', function () {
+        return view('backend.bidangstudi.index');
+     });
+    Route::resource('bidangstudi', 'BidangStudiController');
     Route::resource('user', 'UserController');
 });
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
+

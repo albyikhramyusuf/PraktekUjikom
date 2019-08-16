@@ -8,7 +8,7 @@ class Kompetensi_keahlian extends Model
 {
     public function bidangstudi()
     {
-        return $this->belongsTo('App\BidangStudi', 'bidang_id');
+        return $this->belongsTo('App\Bidang_studi', 'bidang_id');
     }
     public function guru()
     {

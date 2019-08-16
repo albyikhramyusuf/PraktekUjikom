@@ -23,6 +23,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth']], function () {
         return view('backend.bidangstudi.index');
      });
     Route::resource('bidangstudi', 'BidangStudiController');
+    Route::resource('kompetensikeahlian', 'KompetensikeahlianController');
     Route::resource('user', 'UserController');
 });
 
